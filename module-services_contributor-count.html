@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Inaccessible</title>
+    <title>JSDoc: Module: services/contributor-count</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Inaccessible</h1>
+    <h1 class="page-title">Module: services/contributor-count</h1>
 
     
 
@@ -28,11 +28,8 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>
-            <span class="ancestors"><a href="module-core_base-service_errors.html">core/base-service/errors</a>~</span>Inaccessible<span class="signature">(props)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description"><p>Throw this if we can't contact an upstream API
-or to wrap a 5XX response</p></div>
+            
         
     
 </header>
@@ -41,18 +38,123 @@ or to wrap a 5XX response</p></div>
     <div class="container-overview">
     
         
+            <div class="description"><p>Common functions and utilities for tasks related to contributor count.</p></div>
+        
 
-    
-    <h2>Constructor</h2>
-    
-
-    
-    <h4 class="name" id="Inaccessible"><span class="type-signature"></span>new Inaccessible<span class="signature">(props)</span><span class="type-signature"></span></h4>
-    
-
-    
+        
+            
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_contributor-count.js.html">services/contributor-count.js</a>, <a href="services_contributor-count.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~contributorColor"><span class="type-signature">(inner) </span>contributorColor<span class="signature">(contributorCount)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Determines the color used for a badge based on the contributor count.
+The color varies from red to bright green as the contributor count increases.</p>
+</div>
 
 
 
@@ -87,13 +189,13 @@ or to wrap a 5XX response</p></div>
 
         <tr>
             
-                <td class="name"><code>props</code></td>
+                <td class="name"><code>contributorCount</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="module-core_base-service_errors.html#~RuntimeErrorProps">module:core/base-service/errors~RuntimeErrorProps</a></span>
+<span class="param-type">number</span>
 
 
             
@@ -103,7 +205,7 @@ or to wrap a 5XX response</p></div>
 
             
 
-            <td class="description last"><p>Refer to individual attrs</p></td>
+            <td class="description last"><p>Contributor count</p></td>
         </tr>
 
     
@@ -144,7 +246,7 @@ or to wrap a 5XX response</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_base-service_errors.js.html">core/base-service/errors.js</a>, <a href="core_base-service_errors.js.html#line106">line 106</a>
+        <a href="services_contributor-count.js.html">services/contributor-count.js</a>, <a href="services_contributor-count.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -169,13 +271,205 @@ or to wrap a 5XX response</p></div>
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Badge color</p>
+</div>
 
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
 
+
+    </dd>
+</dl>
 
     
-    </div>
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~renderContributorBadge"><span class="type-signature">(inner) </span>renderContributorBadge<span class="signature">(attrs)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Handles rendering concerns of badges that display contributor count.
+Determines the message and color of the badge according to the contributor count.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>attrs</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Refer to individual attributes</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>label</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>If provided then badge label is set to this value</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>contributorCount</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Contributor count</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
 
     
 
@@ -191,6 +485,72 @@ or to wrap a 5XX response</p></div>
 
     
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_contributor-count.js.html">services/contributor-count.js</a>, <a href="services_contributor-count.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Badge with label, message and color properties</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
