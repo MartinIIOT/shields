@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: core/service-test-runner/create-service-tester</title>
+    <title>JSDoc: Source: services/package-json-helpers.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,170 +17,96 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: core/service-test-runner/create-service-tester</h1>
+    <h1 class="page-title">Source: services/package-json-helpers.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~createServiceTester"><span class="type-signature">(async, inner) </span>createServiceTester<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="module-core_service-test-runner_service-tester-ServiceTester.html">module:core/service-test-runner/service-tester~ServiceTester</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Automatically create a ServiceTester.</p>
-<p>When run from e.g. <code>gem-rank.tester.js</code>, this will create a tester that
-attaches to the service found in <code>gem-rank.service.js</code>.</p>
-<p>This can't be used for <code>.service.js</code> files which export more than one
-service.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="core_service-test-runner_create-service-tester.js.html">core/service-test-runner/create-service-tester.js</a>, <a href="core_service-test-runner_create-service-tester.js.html#line21">line 21</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>ServiceTester instance</p>
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="module-core_service-test-runner_service-tester-ServiceTester.html">module:core/service-test-runner/service-tester~ServiceTester</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Common functions and utilities for tasks related to package.json
+ *
+ * @module
+ */
+
+import Joi from 'joi'
+import { InvalidParameter } from './index.js'
+
+/**
+ * Joi schema for validating dependency map.
+ *
+ * @type {Joi}
+ */
+const isDependencyMap = Joi.object()
+  .pattern(
+    /./,
+    // This accepts a semver range, a URL, and many other possible values.
+    Joi.string().min(1).required()
+  )
+  .default({})
+
+/**
+ * Joi schema for validating package json object.
+ * Checks if the object has all the dependency types and the dependency types are valid.
+ *
+ * @type {Joi}
+ */
+const isPackageJsonWithDependencies = Joi.object({
+  dependencies: isDependencyMap,
+  devDependencies: isDependencyMap,
+  peerDependencies: isDependencyMap,
+  optionalDependencies: isDependencyMap,
+}).required()
+
+/**
+ * Determines the dependency version based on the dependency type.
+ *
+ * @param {object} attrs - Refer to individual attributes
+ * @param {string} attrs.kind - Wanted dependency type, defaults to prod
+ * @param {string} attrs.wantedDependency - Name of the wanted dependency
+ * @param {object} attrs.dependencies - Map of dependencies
+ * @param {object} attrs.devDependencies - Map of dev dependencies
+ * @param {object} attrs.peerDependencies - Map of peer dependencies
+ * @param {object} attrs.optionalDependencies - Map of optional dependencies
+ * @throws {string} - Error message if unknown dependency type provided
+ * @throws {InvalidParameter} - Error if wanted dependency is not present
+ * @returns {object} Object containing semver range of the wanted dependency (eg. ~2.1.6 or >=3.0.0 or &lt;4.0.0)
+ */
+function getDependencyVersion({
+  kind = 'prod',
+  wantedDependency,
+  dependencies,
+  devDependencies,
+  peerDependencies,
+  optionalDependencies,
+}) {
+  const dependencyMaps = {
+    peer: peerDependencies,
+    optional: optionalDependencies,
+    dev: devDependencies,
+    prod: dependencies,
+  }
+
+  if (!(kind in dependencyMaps)) {
+    throw Error(`Not very kind: ${kind}`)
+  }
+  const range = dependencyMaps[kind][wantedDependency]
+  if (range === undefined) {
+    throw new InvalidParameter({
+      prettyMessage: `${kind} dependency not found`,
+    })
+  }
+
+  return { range }
+}
+
+export { isDependencyMap, isPackageJsonWithDependencies, getDependencyVersion }
+</code></pre>
+        </article>
+    </section>
 
 
 
